@@ -15,15 +15,16 @@ const projectData = {};
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
-app.get("/", sendData);
 const sendData = (req, res) => {
   res.send(projectData);
 };
-app.post("/addNewWeatherData", addData);
 const addData = (req, res) => {
-  projectData.temprature = req.body.temprature;
+  projectData.temperature = req.body.temperature;
   projectData.date = req.body.date;
   projectData.user_response = req.body.user_response;
+  res.json(projectData);
   res.end();
   console.log(projectData);
 };
+app.get("/home", sendData);
+app.post("/addNewWeatherData", addData);
